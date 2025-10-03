@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { IProduct } from './product.model';
-import { CurrencyPipe, NgFor, NgIf, NgClass, NgStyle } from '@angular/common';
+import { NgFor } from '@angular/common';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
 
 @Component({
   selector: 'bot-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css'],
   standalone: true,
-  imports: [NgFor, NgIf, CurrencyPipe, NgClass, NgStyle],
+  imports: [NgFor, ProductDetailsComponent],
 })
 export class CatalogComponent {
   products: IProduct[];
   filter: string = '';
+  cart: IProduct[] = [];
 
   constructor() {
     this.products = [
@@ -191,13 +193,9 @@ export class CatalogComponent {
     ];
   }
 
-  getDiscountedClasses(product: IProduct) {
-    return { strikethrough: product.discount > 0 };
-  }
-
-  getImageUrl(product: IProduct) {
-    if (!product) return '';
-    return 'assets/images/robot-parts/' + product.imageName;
+  addToCart(product: IProduct) {
+    this.cart.push(product);
+    console.log(`product ${product.name} added to cart`);
   }
 
   getFilteredProducts() {
