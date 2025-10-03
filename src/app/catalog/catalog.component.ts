@@ -13,7 +13,6 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 export class CatalogComponent {
   products: IProduct[];
   filter: string = '';
-  cart: IProduct[] = [];
 
   constructor() {
     this.products = [
@@ -193,10 +192,7 @@ export class CatalogComponent {
     ];
   }
 
-  addToCart(product: IProduct) {
-    this.cart.push(product);
-    console.log(`product ${product.name} added to cart`);
-  }
+  addToCart(product: IProduct) {}
 
   getFilteredProducts() {
     return this.filter === ''
