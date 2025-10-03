@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IProduct } from '../catalog/product.model';
 import { CurrencyPipe, NgClass, NgIf, NgStyle } from '@angular/common';
 
@@ -11,6 +11,7 @@ import { CurrencyPipe, NgClass, NgIf, NgStyle } from '@angular/common';
 })
 export class ProductDetailsComponent {
   @Input() product!: IProduct;
+  @Output() buy = new EventEmitter();
 
   getImageUrl(product: IProduct) {
     if (!product) return '';
@@ -21,5 +22,7 @@ export class ProductDetailsComponent {
     return { strikethrough: product.discount > 0 };
   }
 
-  addToCart(product: IProduct) {}
+  buyButtonClicked(product: IProduct) {
+    this.buy.emit();
+  }
 }
