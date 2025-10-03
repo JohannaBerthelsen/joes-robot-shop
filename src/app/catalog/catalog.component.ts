@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IProduct } from './product.model';
 import { NgFor } from '@angular/common';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'bot-catalog',
@@ -14,7 +15,7 @@ export class CatalogComponent {
   products: IProduct[];
   filter: string = '';
 
-  constructor() {
+  constructor(private cartSvc: CartService) {
     this.products = [
       {
         id: 1,
@@ -192,7 +193,9 @@ export class CatalogComponent {
     ];
   }
 
-  addToCart(product: IProduct) {}
+  addToCart(product: IProduct) {
+    this.cartSvc.add(product);
+  }
 
   getFilteredProducts() {
     return this.filter === ''
