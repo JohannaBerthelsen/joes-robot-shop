@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../catalog/product.model';
 import { CartService } from './cart.service';
+import { CurrencyPipe, NgClass, NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'bot-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
+  standalone: true,
+  imports: [NgClass, CurrencyPipe, NgIf, NgFor],
 })
 export class CartComponent implements OnInit {
   private cart: IProduct[] = [];
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService) {}
 
   ngOnInit() {
     this.cartService.getCart().subscribe({
