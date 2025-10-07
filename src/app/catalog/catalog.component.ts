@@ -4,14 +4,14 @@ import { NgFor } from '@angular/common';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'bot-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css'],
   standalone: true,
-  imports: [NgFor, ProductDetailsComponent],
+  imports: [NgFor, ProductDetailsComponent, RouterModule],
 })
 export class CatalogComponent {
   products: IProduct[] = [];
@@ -20,13 +20,17 @@ export class CatalogComponent {
   constructor(
     private cartSvc: CartService,
     private productSvc: ProductService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.productSvc.getProducts().subscribe((products) => {
       this.products = products;
     });
+    this.route.queryParams.subscribe((params) =>{
+      this.filter = params['filter'] ?? '';
+    })
   }
 
   addToCart(product: IProduct) {
