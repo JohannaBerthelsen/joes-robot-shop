@@ -4,6 +4,7 @@ import { NgFor } from '@angular/common';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bot-catalog',
@@ -18,7 +19,8 @@ export class CatalogComponent {
 
   constructor(
     private cartSvc: CartService,
-    private productSvc: ProductService
+    private productSvc: ProductService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -29,6 +31,7 @@ export class CatalogComponent {
 
   addToCart(product: IProduct) {
     this.cartSvc.add(product);
+    this.router.navigate(['/cart'])
   }
 
   getFilteredProducts() {
