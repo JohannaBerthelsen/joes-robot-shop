@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { IUserCredentials } from '../user.model';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../user.service';
