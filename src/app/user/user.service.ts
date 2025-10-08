@@ -19,12 +19,12 @@ export class UserService {
   }
 
   signIn(credentials: IUserCredentials): Observable<IUser> {
-    return this.http
-      .post<IUser>('/api/sign-in', credentials)
-      .pipe(map((user: IUser) => {
+    return this.http.post<IUser>('/api/sign-in', credentials).pipe(
+      map((user: IUser) => {
         this.user.next(user);
         return user;
-      }));
+      })
+    );
   }
 
   signOut() {
